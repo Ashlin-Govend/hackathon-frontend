@@ -13,6 +13,8 @@ import {
 } from "@/components/ui/card";
 import { Brain, Gamepad2Icon as GameController2 } from "lucide-react";
 import { Dialog, DialogPanel } from "@headlessui/react";
+import LearnWithKwethuIcon from "@/components/icons/LearnWithKwethu";
+import CurvedTextButton from "@/components/ui/curved-text-button";
 
 const navigation = [
   { name: "Product", href: "#" },
@@ -31,7 +33,11 @@ export default function HomePage() {
         backgroundImage: `url(${bg})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+        minHeight: "100vh",
+        width: "100%",
       }}
+      className="flex flex-col justify-between"
     >
       {/* Hero Section */}
       <div className="relative isolate pt-12">
@@ -39,7 +45,7 @@ export default function HomePage() {
           <img
             src="/assets/images/logo.png"
             alt="Logo"
-            className="sm:w-32 lg:w-64"
+            className="w-48 sm:w-48 md:w-64 lg:w-80 xl:w-80"
           />
         </div>
 
@@ -53,14 +59,6 @@ export default function HomePage() {
                 Unlocking Potential: Your Partner in Cultivating Your Child's
                 Educational Journey
               </p>
-              <div className="mt-8">
-                <a
-                  href="#"
-                  className="inline-block rounded-full text-white bg-secondary px-6 py-3 text-lg font-semibold shadow-md hover:bg-yellow-300"
-                >
-                  Join for Free
-                </a>
-              </div>
               <div className="flex justify-center mt-4">
                 <img
                   src="/assets/images/hero.png"
@@ -72,58 +70,32 @@ export default function HomePage() {
           </div>
         </div>
       </div>
-
-      {/* Existing Content */}
-      <div className="container mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-          <Card className="flex flex-col h-full">
-            <CardHeader>
-              <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-4">
-                <Brain className="h-6 w-6 text-primary" />
-              </div>
-              <CardTitle>AI Learning Assistant</CardTitle>
-              <CardDescription>
-                Ask questions about any topic and get AI-generated answers and
-                learning materials
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="flex-grow">
-              <p className="text-muted-foreground">
-                Our AI assistant provides detailed explanations, examples, and
-                related resources to help you understand any concept.
-              </p>
-            </CardContent>
-            <CardFooter>
-              <Link href="/learn" className="w-full">
-                <Button className="w-full">Start Learning</Button>
-              </Link>
-            </CardFooter>
-          </Card>
-
-          <Card className="flex flex-col h-full">
-            <CardHeader>
-              <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-4">
-                <GameController2 className="h-6 w-6 text-primary" />
-              </div>
-              <CardTitle>Knowledge Games</CardTitle>
-              <CardDescription>
-                Test your understanding with interactive quizzes and games
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="flex-grow">
-              <p className="text-muted-foreground">
-                Reinforce what you've learned through fun, interactive games
-                that adapt to your knowledge level.
-              </p>
-            </CardContent>
-            <CardFooter>
-              <Link href="/play" className="w-full">
-                <Button className="w-full" variant="outline">
-                  Play & Learn
-                </Button>
-              </Link>
-            </CardFooter>
-          </Card>
+      <div className="flex flex-col items-center space-y-4 pb-8 sm:absolute sm:inset-x-0 sm:bottom-0">
+        <div className="flex flex-col sm:flex-row sm:space-x-4 space-y-4 sm:space-y-0">
+          <Link href="/play">
+            <div className="flex flex-row items-center space-x-2 px-10 py-4 rounded-lg bg-white shadow-md hover:bg-gray-100">
+              <img
+                src="/assets/images/game-modified.png"
+                alt="Game Icon"
+                className="w-10 h-10"
+              />
+              <span className="text-xl font-semibold text-gray-800">
+                Play Games
+              </span>
+            </div>
+          </Link>
+          <Link href="/learn">
+            <div className="flex flex-row items-center space-x-2 px-10 py-4 rounded-lg bg-white shadow-md hover:bg-gray-100">
+              <img
+                src="/assets/images/brains-modified.png"
+                alt="Brain Icon"
+                className="w-10 h-10"
+              />
+              <span className="text-xl font-semibold text-gray-800">
+                Learn More
+              </span>
+            </div>
+          </Link>
         </div>
       </div>
     </div>

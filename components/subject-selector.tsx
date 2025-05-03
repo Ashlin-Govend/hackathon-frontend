@@ -18,21 +18,26 @@ import {
 } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
 
-interface TopicSelectorProps {
+interface GradeSelectorProps {
   onSelect: (topic: string) => void;
 }
 
-export function TopicSelector({ onSelect }: TopicSelectorProps) {
+export function SubjectSelector({ onSelect }: GradeSelectorProps) {
   const [open, setOpen] = useState(false);
   const [selectedTopic, setSelectedTopic] = useState("");
 
   // In a real app, these would be fetched from an API based on the user's learning history
-
   const topics = [
-    {
-      value: "living-and-non-living-things",
-      label: "Living and Non-Living Things",
-    },
+    // { value: "mathematics", label: "Mathematics" },
+    // { value: "physics", label: "Physics" },
+    { value: "biology", label: "Biology" },
+    // { value: "chemistry", label: "Chemistry" },
+    // { value: "history", label: "History" },
+    // { value: "literature", label: "Literature" },
+    // { value: "computer-science", label: "Computer Science" },
+    // { value: "astronomy", label: "Astronomy" },
+    // { value: "geography", label: "Geography" },
+    // { value: "psychology", label: "Psychology" },
   ];
 
   const handleSelect = (topic: string) => {
@@ -52,14 +57,14 @@ export function TopicSelector({ onSelect }: TopicSelectorProps) {
         >
           {selectedTopic
             ? topics.find((topic) => topic.value === selectedTopic)?.label
-            : "Select a Topic..."}
+            : "Select a Subject..."}
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-full p-0">
         <Command>
-          <CommandInput placeholder="Search Topics..." className="h-9" />
+          <CommandInput placeholder="Search Subject..." className="h-9" />
           <CommandList>
-            <CommandEmpty>No topics found.</CommandEmpty>
+            <CommandEmpty>No Subjects found.</CommandEmpty>
             <CommandGroup>
               {topics.map((topic) => (
                 <CommandItem

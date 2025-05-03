@@ -1,56 +1,106 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Progress } from "@/components/ui/progress"
-import { Trophy, ArrowRight, RefreshCw } from "lucide-react"
-import { QuizGame } from "@/components/quiz-game"
-import { TopicSelector } from "@/components/topic-selector"
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Progress } from "@/components/ui/progress";
+import { Trophy, ArrowRight, RefreshCw } from "lucide-react";
+import { QuizGame } from "@/components/quiz-game";
+import { TopicSelector } from "@/components/topic-selector";
+import { GradeSelector } from "@/components/grade-selector";
+import { SubjectSelector } from "@/components/subject-selector";
 
 export default function PlayPage() {
-  const [selectedTopic, setSelectedTopic] = useState("")
-  const [gameStarted, setGameStarted] = useState(false)
-  const [gameCompleted, setGameCompleted] = useState(false)
-  const [score, setScore] = useState(0)
+  const [selectedTopic, setSelectedTopic] = useState("");
+  const [selectedGrade, setSelectedGrade] = useState("");
+  const [selectedSubject, setSelectedSubject] = useState("");
+
+  const [gameStarted, setGameStarted] = useState(false);
+  const [gameCompleted, setGameCompleted] = useState(false);
+  const [score, setScore] = useState(0);
 
   const handleTopicSelect = (topic: string) => {
-    setSelectedTopic(topic)
-  }
+    setSelectedTopic(topic);
+  };
+  const handleGradeSelect = (topic: string) => {
+    setSelectedGrade(topic);
+  };
+  const handleSubjectSelect = (topic: string) => {
+    setSelectedSubject(topic);
+  };
 
   const startGame = () => {
-    setGameStarted(true)
-    setGameCompleted(false)
-    setScore(0)
-  }
+    if (selectedGrade == "grade-3") {
+      window.open(
+        "https://kaboomjs.com/examples/platformer",
+        "_blank",
+        "noopener,noreferrer"
+      );
+      return;
+    }
+    setGameStarted(true);
+    setGameCompleted(false);
+    setScore(0);
+  };
 
   const handleGameComplete = (finalScore: number) => {
-    setScore(finalScore)
-    setGameCompleted(true)
-  }
+    setScore(finalScore);
+    setGameCompleted(true);
+  };
 
   const resetGame = () => {
-    setSelectedTopic("")
-    setGameStarted(false)
-    setGameCompleted(false)
-  }
+    setSelectedTopic("");
+    setSelectedGrade("");
+    setSelectedSubject("");
+    setGameStarted(false);
+    setGameCompleted(false);
+  };
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-8">Knowledge Games</h1>
+      <div className="flex items-center mb-8">
+        <Button
+          variant="ghost"
+          onClick={() => (window.location.href = "/")}
+          className="mr-4"
+        >
+          <ArrowRight className="mr-2 h-4 w-8 rotate-180" />
+        </Button>
+        <h1 className="text-3xl font-bold">Knowledge Games</h1>
+      </div>
 
       {!gameStarted && !gameCompleted ? (
         <div className="max-w-2xl mx-auto">
           <Card>
             <CardHeader>
-              <CardTitle>Select a Topic to Play</CardTitle>
-              <CardDescription>Choose a topic you've learned about to test your knowledge</CardDescription>
+              <CardTitle className="text-3xl">
+                Select Your Preferences
+              </CardTitle>
+              <CardDescription className="text-xl">
+                Choose a grade, subject, and topic to start the game
+              </CardDescription>
             </CardHeader>
             <CardContent>
-              <TopicSelector onSelect={handleTopicSelect} />
+              <div className="space-y-4">
+                <GradeSelector onSelect={handleGradeSelect} />
+                <SubjectSelector onSelect={handleSubjectSelect} />
+                <TopicSelector onSelect={handleTopicSelect} />
+              </div>
             </CardContent>
+
             <CardFooter>
-              <Button onClick={startGame} disabled={!selectedTopic} className="w-full">
+              <Button
+                onClick={startGame}
+                disabled={!selectedTopic || !selectedGrade || !selectedSubject}
+                className="w-full text-2xl"
+              >
                 Start Game <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </CardFooter>
@@ -61,26 +111,28 @@ export default function PlayPage() {
           <Card>
             <CardHeader className="text-center">
               <Trophy className="h-16 w-16 text-yellow-500 mx-auto mb-4" />
-              <CardTitle>Game Completed!</CardTitle>
-              <CardDescription>You've completed the quiz on {selectedTopic}</CardDescription>
+              <CardTitle className="text-3xl">Game Completed!</CardTitle>
+              <CardDescription className="text-lg">
+                You've completed the quiz on {selectedTopic}
+              </CardDescription>
             </CardHeader>
             <CardContent className="text-center">
               <h3 className="text-2xl font-bold mb-4">Your Score: {score}%</h3>
               <Progress value={score} className="h-4 mb-6" />
 
               <div className="grid gap-4 mb-6">
-                <div className="p-4 bg-primary/10 rounded-lg">
+                <div className="p-4 bg-primary/10 rounded-lg text-xl">
                   <h4 className="font-medium mb-2">What you did well:</h4>
-                  <p className="text-sm text-muted-foreground">
+                  <p className="text-lg text-muted-foreground">
                     {score > 70
                       ? "Great job! You have a solid understanding of the topic."
                       : "You've made a good start with understanding the basics."}
                   </p>
                 </div>
 
-                <div className="p-4 bg-primary/10 rounded-lg">
+                <div className="p-4 bg-primary/10 rounded-lg text-xl">
                   <h4 className="font-medium mb-2">Areas to improve:</h4>
-                  <p className="text-sm text-muted-foreground">
+                  <p className="text-lg text-muted-foreground">
                     {score > 70
                       ? "Review the few questions you missed to perfect your knowledge."
                       : "Consider revisiting the learning materials to strengthen your understanding."}
@@ -89,10 +141,14 @@ export default function PlayPage() {
               </div>
             </CardContent>
             <CardFooter className="flex flex-col sm:flex-row gap-4">
-              <Button variant="outline" onClick={resetGame} className="w-full sm:w-auto">
+              <Button
+                variant="outline"
+                onClick={resetGame}
+                className="w-full sm:w-auto text-xl"
+              >
                 <RefreshCw className="mr-2 h-4 w-4" /> Try Another Topic
               </Button>
-              <Button onClick={startGame} className="w-full sm:w-auto">
+              <Button onClick={startGame} className="w-full sm:w-auto text-xl">
                 Play Again
               </Button>
             </CardFooter>
@@ -102,5 +158,5 @@ export default function PlayPage() {
         <QuizGame topic={selectedTopic} onComplete={handleGameComplete} />
       )}
     </div>
-  )
+  );
 }

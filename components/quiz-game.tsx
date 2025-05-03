@@ -1,73 +1,82 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
-import { Label } from "@/components/ui/label"
-import { Progress } from "@/components/ui/progress"
-import { ArrowRight, CheckCircle, XCircle } from "lucide-react"
+import { useState, useEffect } from "react";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Label } from "@/components/ui/label";
+import { Progress } from "@/components/ui/progress";
+import { ArrowRight, CheckCircle, XCircle } from "lucide-react";
 
 interface QuizGameProps {
-  topic: string
-  onComplete: (score: number) => void
+  topic: string;
+  onComplete: (score: number) => void;
 }
 
 interface Question {
-  id: number
-  text: string
-  options: string[]
-  correctAnswer: number
+  id: number;
+  text: string;
+  options: string[];
+  correctAnswer: number;
 }
 
 export function QuizGame({ topic, onComplete }: QuizGameProps) {
-  const [questions, setQuestions] = useState<Question[]>([])
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
-  const [selectedOption, setSelectedOption] = useState<number | null>(null)
-  const [isAnswered, setIsAnswered] = useState(false)
-  const [correctAnswers, setCorrectAnswers] = useState(0)
-  const [loading, setLoading] = useState(true)
+  const [questions, setQuestions] = useState<Question[]>([]);
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [selectedOption, setSelectedOption] = useState<number | null>(null);
+  const [isAnswered, setIsAnswered] = useState(false);
+  const [correctAnswers, setCorrectAnswers] = useState(0);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     // In a real app, you would fetch questions from an API based on the topic
     // For now, we'll generate some sample questions
-    setLoading(true)
+    setLoading(true);
     setTimeout(() => {
-      setQuestions(generateQuestions(topic))
-      setLoading(false)
-    }, 1000)
-  }, [topic])
+      setQuestions(generateQuestions(topic));
+      setLoading(false);
+    }, 1000);
+  }, [topic]);
 
-  const currentQuestion = questions[currentQuestionIndex]
-  const progress = (currentQuestionIndex / questions.length) * 100
+  const currentQuestion = questions[currentQuestionIndex];
+  const progress = (currentQuestionIndex / questions.length) * 100;
 
   const handleOptionSelect = (optionIndex: number) => {
-    if (isAnswered) return
-    setSelectedOption(optionIndex)
-  }
+    if (isAnswered) return;
+    setSelectedOption(optionIndex);
+  };
 
   const handleCheckAnswer = () => {
-    if (selectedOption === null) return
+    if (selectedOption === null) return;
 
-    setIsAnswered(true)
+    setIsAnswered(true);
     if (selectedOption === currentQuestion.correctAnswer) {
-      setCorrectAnswers((prev) => prev + 1)
+      setCorrectAnswers((prev) => prev + 1);
     }
-  }
+  };
 
   const handleNextQuestion = () => {
     if (currentQuestionIndex < questions.length - 1) {
-      setCurrentQuestionIndex((prev) => prev + 1)
-      setSelectedOption(null)
-      setIsAnswered(false)
+      setCurrentQuestionIndex((prev) => prev + 1);
+      setSelectedOption(null);
+      setIsAnswered(false);
     } else {
       // Quiz completed
       const finalScore = Math.round(
-        ((correctAnswers + (selectedOption === currentQuestion.correctAnswer ? 1 : 0)) / questions.length) * 100,
-      )
-      onComplete(finalScore)
+        ((correctAnswers +
+          (selectedOption === currentQuestion.correctAnswer ? 1 : 0)) /
+          questions.length) *
+          100
+      );
+      onComplete(finalScore);
     }
-  }
+  };
 
   if (loading) {
     return (
@@ -83,11 +92,13 @@ export function QuizGame({ topic, onComplete }: QuizGameProps) {
                 <div className="h-5 bg-primary/20 rounded"></div>
               </div>
             </div>
-            <p className="mt-4 text-muted-foreground">Loading questions about {topic}...</p>
+            <p className="mt-4 text-muted-foreground">
+              Loading questions about {topic}...
+            </p>
           </CardContent>
         </Card>
       </div>
-    )
+    );
   }
 
   if (!currentQuestion) {
@@ -95,22 +106,24 @@ export function QuizGame({ topic, onComplete }: QuizGameProps) {
       <div className="max-w-2xl mx-auto">
         <Card>
           <CardContent className="p-8 text-center">
-            <p>No questions available for this topic. Please try another topic.</p>
+            <p>
+              No questions available for this topic. Please try another topic.
+            </p>
           </CardContent>
         </Card>
       </div>
-    )
+    );
   }
 
   return (
     <div className="max-w-2xl mx-auto">
-      <div className="mb-4 flex items-center justify-between">
+      <div className="mb-2 flex items-center justify-between">
         <div>
-          <span className="text-sm font-medium">
+          <span className="text-xl font-medium">
             Question {currentQuestionIndex + 1} of {questions.length}
           </span>
         </div>
-        <div className="text-sm font-medium">
+        <div className="text-xl font-medium">
           Score: {correctAnswers}/{currentQuestionIndex + (isAnswered ? 1 : 0)}
         </div>
       </div>
@@ -129,9 +142,11 @@ export function QuizGame({ topic, onComplete }: QuizGameProps) {
                 className={`flex items-center space-x-2 rounded-md border p-3 cursor-pointer ${
                   isAnswered && index === currentQuestion.correctAnswer
                     ? "border-green-500 bg-green-50"
-                    : isAnswered && index === selectedOption && index !== currentQuestion.correctAnswer
-                      ? "border-red-500 bg-red-50"
-                      : ""
+                    : isAnswered &&
+                      index === selectedOption &&
+                      index !== currentQuestion.correctAnswer
+                    ? "border-red-500 bg-red-50"
+                    : ""
                 }`}
                 onClick={() => handleOptionSelect(index)}
               >
@@ -141,34 +156,45 @@ export function QuizGame({ topic, onComplete }: QuizGameProps) {
                   checked={selectedOption === index}
                   disabled={isAnswered}
                 />
-                <Label htmlFor={`option-${index}`} className="flex-grow cursor-pointer">
+                <Label
+                  htmlFor={`option-${index}`}
+                  className="flex-grow cursor-pointer text-xl"
+                >
                   {option}
                 </Label>
                 {isAnswered && index === currentQuestion.correctAnswer && (
                   <CheckCircle className="h-5 w-5 text-green-500" />
                 )}
-                {isAnswered && index === selectedOption && index !== currentQuestion.correctAnswer && (
-                  <XCircle className="h-5 w-5 text-red-500" />
-                )}
+                {isAnswered &&
+                  index === selectedOption &&
+                  index !== currentQuestion.correctAnswer && (
+                    <XCircle className="h-5 w-5 text-red-500" />
+                  )}
               </div>
             ))}
           </RadioGroup>
         </CardContent>
         <CardFooter className="flex justify-between">
           {!isAnswered ? (
-            <Button onClick={handleCheckAnswer} disabled={selectedOption === null} className="w-full">
+            <Button
+              onClick={handleCheckAnswer}
+              disabled={selectedOption === null}
+              className="w-full text-xl"
+            >
               Check Answer
             </Button>
           ) : (
-            <Button onClick={handleNextQuestion} className="w-full">
-              {currentQuestionIndex < questions.length - 1 ? "Next Question" : "Finish Quiz"}
+            <Button onClick={handleNextQuestion} className="w-full text-xl">
+              {currentQuestionIndex < questions.length - 1
+                ? "Next Question"
+                : "Finish Quiz"}
               <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
           )}
         </CardFooter>
       </Card>
     </div>
-  )
+  );
 }
 
 // Helper function to generate sample questions
@@ -233,5 +259,5 @@ function generateQuestions(topic: string): Question[] {
       ],
       correctAnswer: 2,
     },
-  ]
+  ];
 }

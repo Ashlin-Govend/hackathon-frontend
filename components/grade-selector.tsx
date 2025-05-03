@@ -18,21 +18,28 @@ import {
 } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
 
-interface TopicSelectorProps {
+interface GradeSelectorProps {
   onSelect: (topic: string) => void;
 }
 
-export function TopicSelector({ onSelect }: TopicSelectorProps) {
+export function GradeSelector({ onSelect }: GradeSelectorProps) {
   const [open, setOpen] = useState(false);
   const [selectedTopic, setSelectedTopic] = useState("");
 
   // In a real app, these would be fetched from an API based on the user's learning history
-
   const topics = [
-    {
-      value: "living-and-non-living-things",
-      label: "Living and Non-Living Things",
-    },
+    // { value: "grade-1", label: "Grade 1" },
+    // { value: "grade-2", label: "Grade 2" },
+    { value: "grade-3", label: "Grade 3" },
+    // { value: "grade-4", label: "Grade 4" },
+    // { value: "grade-5", label: "Grade 5" },
+    // { value: "grade-6", label: "Grade 6" },
+    { value: "grade-7", label: "Grade 7" },
+    // { value: "grade-8", label: "Grade 8" },
+    // { value: "grade-9", label: "Grade 9" },
+    // { value: "grade-10", label: "Grade 10" },
+    // { value: "grade-11", label: "Grade 11" },
+    // { value: "grade-12", label: "Grade 12" },
   ];
 
   const handleSelect = (topic: string) => {
@@ -52,14 +59,14 @@ export function TopicSelector({ onSelect }: TopicSelectorProps) {
         >
           {selectedTopic
             ? topics.find((topic) => topic.value === selectedTopic)?.label
-            : "Select a Topic..."}
+            : "Select a Grade..."}
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-full p-0">
         <Command>
-          <CommandInput placeholder="Search Topics..." className="h-9" />
+          <CommandInput placeholder="Search Grades..." className="h-9" />
           <CommandList>
-            <CommandEmpty>No topics found.</CommandEmpty>
+            <CommandEmpty>No grades found.</CommandEmpty>
             <CommandGroup>
               {topics.map((topic) => (
                 <CommandItem
