@@ -1,7 +1,6 @@
 "use client"
 
 import { useState } from "react"
-import { useChat } from "ai/react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -12,9 +11,51 @@ import { ChatMessage } from "@/components/chat-message"
 
 export default function LearnPage() {
   const [activeTab, setActiveTab] = useState("chat")
-  const { messages, input, handleInputChange, handleSubmit, isLoading } = useChat({
-    api: "/api/chat",
-  })
+  const [messages, setMessages] = useState<{ id: string; role: "user" | "assistant"; content: string }[]>([])
+  const [input, setInput] = useState("")
+  const [isLoading, setIsLoading] = useState(false)
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInput(e.target.value)
+  }
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!input.trim()) return
+
+    const userMessage = {
+      id: Date.now().toString(),
+      role: "user" as const,
+      content: input.trim(),
+    }
+
+    // Add user message immediately
+    setMessages((prev) => [...prev, userMessage])
+    setInput("")
+    setIsLoading(true)
+
+    try {
+      const res = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ messages: [...messages, userMessage] }),
+      })
+
+      const assistantReply = await res.json()
+
+      const assistantMessage = {
+        id: assistantReply.id,
+        role: assistantReply.role,
+        content: assistantReply.content,
+      }
+
+      setMessages((prev) => [...prev, assistantMessage])
+    } catch (err) {
+      console.error("Failed to fetch assistant response", err)
+    } finally {
+      setIsLoading(false)
+    }
+  }
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -76,7 +117,7 @@ export default function LearnPage() {
               </Card>
             </TabsContent>
             <TabsContent value="materials" className="mt-4">
-              {messages.length > 0 ? (
+              {messages.some((m) => m.role === "assistant") ? (
                 <LearningMaterials messages={messages} />
               ) : (
                 <Card>
