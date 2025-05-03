@@ -1,44 +1,51 @@
-import { StreamingTextResponse } from "ai"
-import { streamText } from "ai"
-import { openai } from "@ai-sdk/openai"
+import { NextRequest, NextResponse } from 'next/server'
 
-export async function POST(req: Request) {
+export async function POST(req: NextRequest) {
   const { messages } = await req.json()
 
-  // Get the last user message
-  const lastUserMessage = messages.filter((m: any) => m.role === "user").pop()
+  const lastUserMessage = messages?.filter((m: any) => m.role === "user").pop()?.content
 
-  // Create a system prompt that instructs the AI to provide educational content
-  const systemPrompt = `
-    You are an educational AI assistant designed to help users learn about various topics.
-    
-    When responding to questions:
-    1. Provide clear, accurate explanations suitable for the user's level of understanding
-    2. Include relevant examples to illustrate concepts
-    3. Suggest related topics or concepts that might interest the user
-    4. If appropriate, mention resources for further learning
-    
-    Always be encouraging and supportive of the learning process.
-  `
+  if (!lastUserMessage) {
+    return NextResponse.json(
+      {
+        id: Date.now().toString(),
+        role: "assistant",
+        content: "No user message provided.",
+      },
+      { status: 400 }
+    )
+  }
 
-  // Create a prompt that includes the user's message and instructions to generate learning materials
-  const prompt = `
-    ${lastUserMessage.content}
-    
-    Please provide:
-    1. A thorough explanation of the topic
-    2. Key concepts and definitions
-    3. Real-world examples or applications
-    4. Related topics that might be interesting to explore
-  `
+  try {
+    const flaskUrl = "http://localhost:5000/askcopilot" // Your Flask route
 
-  // Use the AI SDK to stream the response
-  const { textStream } = await streamText({
-    model: openai("gpt-4o"),
-    system: systemPrompt,
-    prompt: prompt,
-  })
+    const response = await fetch(flaskUrl, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ message: lastUserMessage }),
+    })
 
-  // Return the streaming response
-  return new StreamingTextResponse(textStream)
+    if (!response.ok) {
+      throw new Error(`Flask API returned ${response.status}`)
+    }
+
+    const data = await response.json()
+    console.log
+
+    return NextResponse.json({
+      id: Date.now().toString(),
+      role: "assistant",
+      content: data.response?.toString() || "No response from assistant.",
+    })
+  } catch (error: any) {
+    console.error("❌ Error contacting Flask API:", error.message)
+    return NextResponse.json(
+      {
+        id: Date.now().toString(),
+        role: "assistant",
+        content: "Sorry, something went wrong while generating the response.",
+      },
+      { status: 500 }
+    )
+  }
 }

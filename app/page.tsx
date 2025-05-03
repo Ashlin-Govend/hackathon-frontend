@@ -49,17 +49,12 @@ export default function HomePage() {
               <h1 className="text-7xl pt-2 font-extrabold tracking-tight text-white sm:text-6xl">
                 Boost Your Child's Future
               </h1>
-              <p className="mt-6 text-2xl leading-8 text-center text-white">
+              <p className="mt-6 text-4xl leading-8 text-center text-white">
                 Unlocking Potential: Your Partner in Cultivating Your Child's
                 Educational Journey
               </p>
               <div className="mt-8">
-                <a
-                  href="#"
-                  className="inline-block rounded-full text-white bg-secondary px-6 py-3 text-lg font-semibold shadow-md hover:bg-yellow-300"
-                >
-                  Join for Free
-                </a>
+                
               </div>
               <div className="flex justify-center mt-4">
                 <img
