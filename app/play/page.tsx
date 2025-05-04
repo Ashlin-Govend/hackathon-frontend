@@ -39,7 +39,7 @@ export default function PlayPage() {
   const startGame = () => {
     if (selectedGrade == "grade-3") {
       window.open(
-        "https://kaboomjs.com/examples/platformer",
+        "https://aikwetu-2.vercel.app",
         "_blank",
         "noopener,noreferrer"
       );
