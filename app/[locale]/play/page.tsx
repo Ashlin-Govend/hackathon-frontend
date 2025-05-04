@@ -42,7 +42,7 @@ export default function PlayPage() {
   const startGame = () => {
     if (selectedGrade == "grade-3") {
       window.open(
-        "https://kaboomjs.com/examples/platformer",
+        "https://aikwetu-2.vercel.app",
         "_blank",
         "noopener,noreferrer"
       );
@@ -102,7 +102,7 @@ export default function PlayPage() {
               <Button
                 onClick={startGame}
                 disabled={!selectedTopic || !selectedGrade || !selectedSubject}
-                className="w-full text-2xl"
+                className="w-full text-2xl "
               >
                 {t("preferences.startButton")}{" "}
                 <ArrowRight className="ml-2 h-4 w-4" />

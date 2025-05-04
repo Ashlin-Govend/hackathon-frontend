@@ -1,9 +1,11 @@
-import { NextRequest, NextResponse } from 'next/server'
+import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
-  const { messages } = await req.json()
+  const { messages, language } = await req.json();
 
-  const lastUserMessage = messages?.filter((m: any) => m.role === "user").pop()?.content
+  const lastUserMessage = messages
+    ?.filter((m: any) => m.role === "user")
+    .pop()?.content;
 
   if (!lastUserMessage) {
     return NextResponse.json(
@@ -13,32 +15,34 @@ export async function POST(req: NextRequest) {
         content: "No user message provided.",
       },
       { status: 400 }
-    )
+    );
   }
 
   try {
-    const flaskUrl = "http://localhost:5000/askcopilot" // Your Flask route
+    const flaskUrl = "http://localhost:5000/askcopilot"; // Flask route
 
     const response = await fetch(flaskUrl, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ message: lastUserMessage }),
-    })
+      body: JSON.stringify({
+        message: lastUserMessage,
+        language: language || "English", // fallback if not provided
+      }),
+    });
 
     if (!response.ok) {
-      throw new Error(`Flask API returned ${response.status}`)
+      throw new Error(`Flask API returned ${response.status}`);
     }
 
-    const data = await response.json()
-    console.log
+    const data = await response.json();
 
     return NextResponse.json({
       id: Date.now().toString(),
       role: "assistant",
       content: data.response?.toString() || "No response from assistant.",
-    })
+    });
   } catch (error: any) {
-    console.error("❌ Error contacting Flask API:", error.message)
+    console.error("❌ Error contacting Flask API:", error.message);
     return NextResponse.json(
       {
         id: Date.now().toString(),
@@ -46,6 +50,6 @@ export async function POST(req: NextRequest) {
         content: "Sorry, something went wrong while generating the response.",
       },
       { status: 500 }
-    )
+    );
   }
 }
