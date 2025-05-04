@@ -73,7 +73,7 @@ export default function PlayPage() {
         >
           <ArrowRight className="mr-2 h-4 w-8 rotate-180" />
         </Button>
-        <h1 className="text-3xl font-bold">Knowledge Games</h1>
+        <h1 className="text-3xl font-bold text-[#fac62c]">Knowledge Games</h1>
       </div>
 
       {!gameStarted && !gameCompleted ? (
@@ -99,7 +99,7 @@ export default function PlayPage() {
               <Button
                 onClick={startGame}
                 disabled={!selectedTopic || !selectedGrade || !selectedSubject}
-                className="w-full text-2xl"
+                className="w-full text-2xl "
               >
                 Start Game <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
@@ -122,7 +122,7 @@ export default function PlayPage() {
 
               <div className="grid gap-4 mb-6">
                 <div className="p-4 bg-primary/10 rounded-lg text-xl">
-                  <h4 className="font-medium mb-2">What you did well:</h4>
+                  <h4 className="font-medium mb-2 ">What you did well:</h4>
                   <p className="text-lg text-muted-foreground">
                     {score > 70
                       ? "Great job! You have a solid understanding of the topic."
