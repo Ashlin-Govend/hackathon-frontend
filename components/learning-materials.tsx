@@ -1,3 +1,6 @@
+"use client"
+
+import { useEffect, useState } from "react"
 import type { Message } from "ai"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { BookOpen, FileText, LinkIcon, Video } from "lucide-react"
@@ -7,14 +10,64 @@ interface LearningMaterialsProps {
 }
 
 export function LearningMaterials({ messages }: LearningMaterialsProps) {
-  // In a real app, you would generate these materials based on the conversation
-  // For now, we'll create some sample materials based on the last AI message
   const lastAiMessage = [...messages].reverse().find((m) => m.role === "assistant")
+  const [concepts, setConcepts] = useState("")
+  const [reading, setReading] = useState("")
+  const [video, setVideo] = useState("")
+
+  const topic = extractTopic(lastAiMessage?.content || "")
+
+  useEffect(() => {
+    if (!lastAiMessage) return
+  
+    const topic = extractTopic(lastAiMessage.content)
+    if (!topic) return
+  
+    const fetchData = async () => {
+      try {
+        const [conceptsRes, readingRes, videoRes] = await Promise.all([
+          fetch("/api/key-concepts", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ topic }),
+          }),
+          fetch("/api/recommended-reading", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ topic }),
+          }),
+          fetch("/api/video-resource", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ topic }),
+          }),
+        ])
+  
+        if (!conceptsRes.ok || !readingRes.ok || !videoRes.ok) {
+          throw new Error("One or more Flask responses failed")
+        }
+  
+        const conceptsJson = await conceptsRes.json()
+        const readingJson = await readingRes.json()
+        const videoJson = await videoRes.json()
+  
+        setConcepts(conceptsJson.key_concepts || "")
+        setReading(readingJson.recommended_reading || "")
+        setVideo(videoJson.video_resource || "")
+      } catch (error) {
+        console.error("❌ Failed to fetch learning materials:", error)
+        setConcepts("Failed to load key concepts.")
+        setReading("Failed to load recommended reading.")
+        setVideo("Failed to load video resource.")
+      }
+    }
+  
+    fetchData()
+  }, [lastAiMessage])
+  
+
 
   if (!lastAiMessage) return null
-
-  // Extract a topic from the last message (simplified)
-  const topic = extractTopic(lastAiMessage.content)
 
   return (
     <div className="space-y-4">
@@ -26,11 +79,7 @@ export function LearningMaterials({ messages }: LearningMaterialsProps) {
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <ul className="space-y-2 text-sm">
-            <li>• {generateKeyConcept(topic, 1)}</li>
-            <li>• {generateKeyConcept(topic, 2)}</li>
-            <li>• {generateKeyConcept(topic, 3)}</li>
-          </ul>
+          <p className="text-sm whitespace-pre-wrap">{concepts || "Loading..."}</p>
         </CardContent>
       </Card>
 
@@ -42,16 +91,7 @@ export function LearningMaterials({ messages }: LearningMaterialsProps) {
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <ul className="space-y-2 text-sm">
-            <li className="flex items-start">
-              <LinkIcon className="h-4 w-4 mr-2 mt-0.5 shrink-0" />
-              <span>{generateReading(topic, 1)}</span>
-            </li>
-            <li className="flex items-start">
-              <LinkIcon className="h-4 w-4 mr-2 mt-0.5 shrink-0" />
-              <span>{generateReading(topic, 2)}</span>
-            </li>
-          </ul>
+          <p className="text-sm whitespace-pre-wrap">{reading || "Loading..."}</p>
         </CardContent>
       </Card>
 
@@ -63,45 +103,14 @@ export function LearningMaterials({ messages }: LearningMaterialsProps) {
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <ul className="space-y-2 text-sm">
-            <li className="flex items-start">
-              <LinkIcon className="h-4 w-4 mr-2 mt-0.5 shrink-0" />
-              <span>{generateVideo(topic, 1)}</span>
-            </li>
-          </ul>
+          <p className="text-sm whitespace-pre-wrap">{video || "Loading..."}</p>
         </CardContent>
       </Card>
     </div>
   )
 }
 
-// Helper functions to generate sample content
 function extractTopic(content: string): string {
-  // In a real app, you would use NLP to extract the main topic
-  // For now, just take the first few words
   const words = content.split(" ").slice(0, 3).join(" ")
-  return words || "the topic"
-}
-
-function generateKeyConcept(topic: string, index: number): string {
-  const concepts = [
-    `Understanding the fundamentals of ${topic}`,
-    `How ${topic} relates to real-world applications`,
-    `Advanced concepts in ${topic} studies`,
-  ]
-
-  return concepts[index - 1] || `Concept ${index} about ${topic}`
-}
-
-function generateReading(topic: string, index: number): string {
-  const readings = [
-    `"Introduction to ${topic}" - A comprehensive guide for beginners`,
-    `"Advanced ${topic}: Theory and Practice" - For deeper understanding`,
-  ]
-
-  return readings[index - 1] || `Reading ${index} about ${topic}`
-}
-
-function generateVideo(topic: string, index: number): string {
-  return `"${topic} Explained" - Educational video series (45 min)`
+  return words || "CAPS topic"
 }

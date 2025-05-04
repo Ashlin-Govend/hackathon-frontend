@@ -55,7 +55,7 @@ export default function HomePage() {
               <h1 className="text-7xl pt-2 font-extrabold tracking-tight text-white sm:text-6xl">
                 Boost Your Child's Future
               </h1>
-              <p className="mt-6 text-2xl leading-8 text-center text-white">
+              <p className="mt-6 text-4xl leading-8 text-center text-white">
                 Unlocking Potential: Your Partner in Cultivating Your Child's
                 Educational Journey
               </p>
