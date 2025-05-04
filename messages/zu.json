@@ -3,7 +3,9 @@
     "title": "Thuthukisa Ikusasa Lomntanakho",
     "description": "Vula Amandla: Umlingani Wakho Ekukhuliseni Uhambo Lwemfundo Lomntanakho",
     "playGameButton": "Dlala Umdlalo",
-    "learnMoreButton": "Funda Okuningi"
+    "learnMoreButton": "Funda Okuningi",
+
+"joinNowButton": "Vula Izici Eziningi"
   },
   "GamePage": {
     "title": "Imidlalo Yolwazi",
