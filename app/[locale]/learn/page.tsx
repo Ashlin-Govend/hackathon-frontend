@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { BookOpen, MessageSquare } from "lucide-react";
+import { ArrowRight, BookOpen, MessageSquare } from "lucide-react";
 import { LearningMaterials } from "@/components/learning-materials";
 import { ChatMessage } from "@/components/chat-message";
 import { useTranslations } from "next-intl";
@@ -67,9 +67,16 @@ export default function LearnPage() {
 
   return (
     <div className="container mx-auto px-4 py-10 bg-[#ffffff] text-gray-900">
-      <h1 className="text-4xl font-bold mb-10 text-center text-[#c49014]">
-        KWEtu AI Learning Assistant
-      </h1>
+      <div className="flex items-center mb-8">
+        <Button
+          variant="ghost"
+          onClick={() => (window.location.href = "/")}
+          className="mr-4"
+        >
+          <ArrowRight className="mr-2 h-4 w-8 rotate-180" />
+        </Button>
+        <h1 className="text-3xl font-bold">{t("title")}</h1>
+      </div>
 
       <div className="mb-6 text-2xl">
         <label htmlFor="language" className="font-semibold mr-4">
@@ -96,19 +103,12 @@ export default function LearnPage() {
               <div className="flex-grow overflow-auto mb-4 space-y-4 text-2xl">
                 {messages.length === 0 ? (
                   <div className="h-full flex flex-col items-center justify-center text-center p-8">
-                    <MessageSquare className="h-12 w-12 text-primary mb-4" />
-                    <h3 className="text-xl font-medium mb-2">
-                      {t("chat.emptyState.title")}
-                    </h3>
-                    <p className="text-muted-foreground max-w-md">
-                      {t("chat.emptyState.description")}
                     <MessageSquare className="h-14 w-14 text-[#086ea3] mb-4" />
                     <h3 className="text-2xl font-semibold mb-2">
-                      Ask me anything!
+                      {t("chat.emptyState.title")}
                     </h3>
                     <p className="text-muted-foreground max-w-xl text-lg">
-                      Ask about any topic you want to learn. I'll provide
-                      detailed explanations and related learning materials.
+                      {t("chat.emptyState.description")}
                     </p>
                   </div>
                 ) : (
@@ -124,7 +124,7 @@ export default function LearnPage() {
                 <Input
                   value={input}
                   onChange={handleInputChange}
-                  placeholder="Ask about any topic..."
+                  placeholder={t("chat.placeholder")}
                   disabled={isLoading}
                   className="flex-grow text-2xl placeholder:text-xl py-4 border border-[#c49014]"
                 />
@@ -133,7 +133,7 @@ export default function LearnPage() {
                   disabled={isLoading || !input.trim()}
                   className="px-6 py-4 text-2xl font-semibold bg-[#c49014] hover:bg-[#b27f0f] text-white"
                 >
-                  {isLoading ? "Thinking..." : "Ask"}
+                  {isLoading ? t("chat.thinking") : t("chat.askButton")}
                 </Button>
               </form>
             </div>
@@ -147,19 +147,21 @@ export default function LearnPage() {
             className="w-full text-lg h-full"
           >
             <TabsList className="grid w-full grid-cols-2 text-lg bg-white border border-[#c49014]">
-              <TabsTrigger value="chat">Chat</TabsTrigger>
-              <TabsTrigger value="materials">Materials</TabsTrigger>
+              <TabsTrigger value="chat">{t("tabs.chat")}</TabsTrigger>
+              <TabsTrigger value="materials">{t("tabs.materials")}</TabsTrigger>
             </TabsList>
             <TabsContent value="chat" className="mt-4">
               <Card>
                 <CardContent className="p-6">
-                  <h3 className="text-2xl font-semibold mb-4 text-[#c49014]">Chat Tips</h3>
+                  <h3 className="text-2xl font-semibold mb-4 text-[#c49014]">
+                    {t("chatTips.title")}
+                  </h3>
                   <ul className="space-y-2 text-base">
-                    <li>• Ask specific questions for better answers</li>
-                    <li>• Try "Explain [topic] in simple terms"</li>
-                    <li>• Ask for examples to understand concepts</li>
-                    <li>• Request related topics to explore further</li>
-                    <li>• Ask "Why is [topic] important?"</li>
+                    <li>• {t("chatTips.tips.tip1")}</li>
+                    <li>• {t("chatTips.tips.tip2")}</li>
+                    <li>• {t("chatTips.tips.tip3")}</li>
+                    <li>• {t("chatTips.tips.tip4")}</li>
+                    <li>• {t("chatTips.tips.tip5")}</li>
                   </ul>
                 </CardContent>
               </Card>
@@ -174,10 +176,10 @@ export default function LearnPage() {
                   <CardContent className="p-6 text-center">
                     <BookOpen className="h-14 w-14 text-[#086ea3] mx-auto mb-4" />
                     <h3 className="text-2xl font-medium mb-2">
-                      No materials yet
+                      {t("materials.emptyState.title")}
                     </h3>
                     <p className="text-muted-foreground text-2xl">
-                      Ask a question to generate learning materials
+                      {t("materials.emptyState.description")}
                     </p>
                   </CardContent>
                 </Card>

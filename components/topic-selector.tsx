@@ -17,6 +17,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
+import { useTranslations } from "next-intl";
 
 interface TopicSelectorProps {
   onSelect: (topic: string) => void;
@@ -25,13 +26,13 @@ interface TopicSelectorProps {
 export function TopicSelector({ onSelect }: TopicSelectorProps) {
   const [open, setOpen] = useState(false);
   const [selectedTopic, setSelectedTopic] = useState("");
+  const t = useTranslations("Selectors.TopicSelector");
 
-  // In a real app, these would be fetched from an API based on the user's learning history
-
+  // Topics are now translated using the JSON fields
   const topics = [
     {
       value: "living-and-non-living-things",
-      label: "Living and Non-Living Things",
+      label: t("topics.livingAndNonLivingThings"),
     },
   ];
 
@@ -52,14 +53,14 @@ export function TopicSelector({ onSelect }: TopicSelectorProps) {
         >
           {selectedTopic
             ? topics.find((topic) => topic.value === selectedTopic)?.label
-            : "Select a Topic..."}
+            : t("placeholder")}
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-full p-0">
         <Command>
-          <CommandInput placeholder="Search Topics..." className="h-9" />
+          <CommandInput placeholder={t("searchPlaceholder")} className="h-9" />
           <CommandList>
-            <CommandEmpty>No topics found.</CommandEmpty>
+            <CommandEmpty>{t("emptyState")}</CommandEmpty>
             <CommandGroup>
               {topics.map((topic) => (
                 <CommandItem
