@@ -1,0 +1,74 @@
+{
+  "HomePage": {
+    "title": "Boost Your Child's Future",
+    "description": "Unlocking Potential: Your Partner in Cultivating Your Child's Educational Journey",
+    "playGameButton": "Play Game",
+    "learnMoreButton": "Learn More"
+  },
+    "GamePage": {
+      "title": "Knowledge Games",
+      "backButton": "Go Back",
+      "preferences": {
+        "title": "Select Your Preferences",
+        "description": "Choose a grade, subject, and topic to start the game",
+        "startButton": "Start Game",
+        "startButtonIconAlt": "Arrow Icon"
+      },
+      "gameCompleted": {
+        "title": "Game Completed!",
+        "description": "You've completed the quiz on {topic}",
+        "scoreTitle": "Your Score: {score}%",
+        "whatYouDidWell": {
+          "title": "What you did well:",
+          "highScoreMessage": "Great job! You have a solid understanding of the topic.",
+          "lowScoreMessage": "You've made a good start with understanding the basics."
+        },
+        "areasToImprove": {
+          "title": "Areas to improve:",
+          "highScoreMessage": "Review the few questions you missed to perfect your knowledge.",
+          "lowScoreMessage": "Consider revisiting the learning materials to strengthen your understanding."
+        },
+        "tryAnotherTopicButton": "Try Another Topic",
+        "playAgainButton": "Play Again"
+      },
+      "quizGame": {
+        "title": "Quiz Game",
+        "description": "Answer the questions to test your knowledge on {topic}"
+      }
+    },
+    "LearnPage": {
+    "title": "AI Learning Assistant",
+    "chat": {
+      "placeholder": "Ask about any topic...",
+      "thinking": "Thinking...",
+      "askButton": "Ask",
+      "emptyState": {
+        "iconAlt": "Message Icon",
+        "title": "Ask me anything!",
+        "description": "Ask about any topic you want to learn. I'll provide detailed explanations and related learning materials."
+      }
+    },
+    "tabs": {
+      "chat": "Chat",
+      "materials": "Materials"
+    },
+    "chatTips": {
+      "title": "Chat Tips",
+      "tips": [
+        "Ask specific questions for better answers",
+        "Try 'Explain [topic] in simple terms'",
+        "Ask for examples to understand concepts",
+        "Request related topics to explore further",
+        "Ask 'Why is [topic] important?'"
+      ]
+    },
+    "materials": {
+      "emptyState": {
+        "iconAlt": "Book Icon",
+        "title": "No materials yet",
+        "description": "Ask a question to generate learning materials"
+      }
+    }
+  }
+
+}
