@@ -1,0 +1,176 @@
+{
+  "HomePage": {
+    "title": "Boost Your Child's Future",
+    "description": "Unlocking Potential: Your Partner in Cultivating Your Child's Educational Journey",
+    "playGameButton": "Play Game",
+    "learnMoreButton": "Learn More"
+  },
+    "GamePage": {
+      "title": "Knowledge Games",
+      "backButton": "Go Back",
+      "preferences": {
+        "title": "Select Your Preferences",
+        "description": "Choose a grade, subject, and topic to start the game",
+        "startButton": "Start Game",
+        "startButtonIconAlt": "Arrow Icon"
+      },
+      "gameCompleted": {
+        "title": "Game Completed!",
+        "description": "You've completed the quiz on {topic}",
+        "scoreTitle": "Your Score: {score}%",
+        "whatYouDidWell": {
+          "title": "What you did well:",
+          "highScoreMessage": "Great job! You have a solid understanding of the topic.",
+          "lowScoreMessage": "You've made a good start with understanding the basics."
+        },
+        "areasToImprove": {
+          "title": "Areas to improve:",
+          "highScoreMessage": "Review the few questions you missed to perfect your knowledge.",
+          "lowScoreMessage": "Consider revisiting the learning materials to strengthen your understanding."
+        },
+        "tryAnotherTopicButton": "Try Another Topic",
+        "playAgainButton": "Play Again"
+      },
+      "quizGame": {
+        "title": "Quiz Game",
+        "description": "Answer the questions to test your knowledge on {topic}"
+      }
+    },
+    "LearnPage": {
+    "title": "KWEtu AI Learning Assistant",
+    "language": {
+      "label": "Language:",
+      "options": {
+        "english": "English",
+        "zulu": "Zulu",
+        "afrikaans": "Afrikaans",
+        "xhosa": "Xhosa",
+        "sesotho": "Sesotho"
+      }
+    },
+    "chat": {
+      "placeholder": "Ask about any topic...",
+      "thinking": "Thinking...",
+      "askButton": "Ask",
+      "emptyState": {
+        "iconAlt": "Message Icon",
+        "title": "Ask me anything!",
+        "description": "Ask about any topic you want to learn. I'll provide detailed explanations and related learning materials."
+      }
+    },
+    "tabs": {
+      "chat": "Chat",
+      "materials": "Materials"
+    },
+    "chatTips": {
+      "title": "Chat Tips",
+      "tips": {
+        "tip1": "Ask specific questions for better answers",
+        "tip2": "Try 'Explain [topic] in simple terms'",
+        "tip3": "Ask for examples to understand concepts",
+        "tip4": "Request related topics to explore further",
+        "tip5": "Ask 'Why is [topic] important?'"
+      }
+    },
+    "materials": {
+      "emptyState": {
+        "iconAlt": "Book Icon",
+        "title": "No materials yet",
+        "description": "Ask a question to generate learning materials"
+      }
+    }
+  },
+  "Selectors": {
+    "GradeSelector": {
+      "placeholder": "Select a Grade...",
+      "searchPlaceholder": "Search Grades...",
+      "emptyState": "No grades found.",
+      "grades": {
+        "grade3": "Grade 3",
+        "grade7": "Grade 7"
+      }
+    },
+    "TopicSelector": {
+      "placeholder": "Select a Topic...",
+      "searchPlaceholder": "Search Topics...",
+      "emptyState": "No topics found.",
+      "topics": {
+        "livingAndNonLivingThings": "Living and Non-Living Things"
+      }
+    },
+    "SubjectSelector": {
+      "placeholder": "Select a Subject...",
+      "searchPlaceholder": "Search Subjects...",
+      "emptyState": "No subjects found.",
+      "subjects": {
+        "biology": "Biology"
+      }
+    }
+  },
+    "QuizGame": {
+      "loading": {
+        "title": "Loading questions...",
+        "description": "Loading questions about "
+      },
+      "noQuestions": {
+        "title": "No Questions Available",
+        "description": "No questions available for this topic. Please try another topic."
+      },
+      "progress": {
+        "question": "Question",
+        "score": "Score:"
+      },
+      "buttons": {
+        "checkAnswer": "Check Answer",
+        "nextQuestion": "Next Question",
+        "finishQuiz": "Finish Quiz"
+      },
+      "results": {
+        "correct": "Correct!",
+        "incorrect": "Incorrect!"
+      },
+      "questions": {
+        "question1": {
+          "text": "What is the main concept behind living and non-living things?",
+          "option1": "It is about classifying objects based on their usefulness to humans",
+          "option2": "It focuses on whether things can move or not",
+          "option3": "It combines both biological characteristics and environmental interaction",
+          "option4": "It is an outdated classification system",
+          "correctAnswer": "option3"
+        },
+        "question2": {
+          "text": "Which of the following is NOT a characteristic of living things?",
+          "option1": "Growth",
+          "option2": "Breathing",
+          "option3": "Reproduction",
+          "option4": "Being made of plastic",
+          "correctAnswer": "option4"
+        },
+        "question3": {
+          "text": "How are living and non-living things typically identified in real-world scenarios?",
+          "option1": "Only through laboratory tests",
+          "option2": "By checking if they are useful",
+          "option3": "By observing movement only",
+          "option4": "By checking for characteristics like growth and response to stimuli",
+          "correctAnswer": "option4"
+        },
+        "question4": {
+          "text": "What is considered the foundation of understanding living and non-living things?",
+          "option1": "Basic principles like growth, respiration, and reproduction",
+          "option2": "Knowing the names of all animals and plants",
+          "option3": "Memorizing scientific terms",
+          "option4": "Reading about the history of biology",
+          "correctAnswer": "option1"
+        },
+        "question5": {
+          "text": "Which field is most closely related to the study of living and non-living things?",
+          "option1": "Mathematics",
+          "option2": "History",
+          "option3": "Biology",
+          "option4": "Geography",
+          "correctAnswer": "option3"
+        }
+      }
+    }
+
+}

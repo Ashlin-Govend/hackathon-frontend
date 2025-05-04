@@ -1,0 +1,175 @@
+{
+  "HomePage": {
+    "title": "Thuthukisa Ikusasa Lomntanakho",
+    "description": "Vula Amandla: Umlingani Wakho Ekukhuliseni Uhambo Lwemfundo Lomntanakho",
+    "playGameButton": "Dlala Umdlalo",
+    "learnMoreButton": "Funda Okuningi"
+  },
+  "GamePage": {
+    "title": "Imidlalo Yolwazi",
+    "backButton": "Buyela Emuva",
+    "preferences": {
+      "title": "Khetha Okuthandayo",
+      "description": "Khetha ibanga, isifundo, nesihloko ukuze uqale umdlalo",
+      "startButton": "Qala Umdlalo",
+      "startButtonIconAlt": "Isithonjana Somcibisholo"
+    },
+    "gameCompleted": {
+      "title": "Umdlalo Uqediwe!",
+      "description": "Usuqede umbuzo ngesihloko esithi {topic}",
+      "scoreTitle": "Amaphuzu Akho: {score}%",
+      "whatYouDidWell": {
+        "title": "Okuhle Okukwenze Kahle:",
+        "highScoreMessage": "Umsebenzi Omuhle! Unokuqonda okuqinile ngesihloko.",
+        "lowScoreMessage": "Usuqalile kahle ukuqonda izisekelo."
+      },
+      "areasToImprove": {
+        "title": "Izindawo Okufanele Uzithuthukise:",
+        "highScoreMessage": "Bheka imibuzo embalwa oyiphuthele ukuze uphelelise ulwazi lwakho.",
+        "lowScoreMessage": "Cabanga ngokubuyela ezintweni zokufunda ukuze uqonde kangcono."
+      },
+      "tryAnotherTopicButton": "Zama Esinye Isihloko",
+      "playAgainButton": "Dlala Futhi"
+    },
+    "quizGame": {
+      "title": "Umdlalo Wombuzo",
+      "description": "Phendula imibuzo ukuze uhlole ulwazi lwakho ngesihloko esithi {topic}"
+    }
+  },
+  "LearnPage": {
+    "title": "KWEtu Umsizi Wokufunda we-AI",
+    "language": {
+      "label": "Ulimi:",
+      "options": {
+        "english": "IsiNgisi",
+        "zulu": "IsiZulu",
+        "afrikaans": "IsiBhunu",
+        "xhosa": "IsiXhosa",
+        "sesotho": "IsiSuthu"
+      }
+    },
+    "chat": {
+      "placeholder": "Buza nganoma yisiphi isihloko...",
+      "thinking": "Ngicabanga...",
+      "askButton": "Buza",
+      "emptyState": {
+        "iconAlt": "Isithonjana Somlayezo",
+        "title": "Buza noma yini!",
+        "description": "Buza nganoma yisiphi isihloko ofuna ukufunda ngaso. Ngizokunikeza izincazelo ezinemininingwane nezinto zokufunda ezihlobene."
+      }
+    },
+    "tabs": {
+      "chat": "Ingxoxo",
+      "materials": "Izinto Zokufunda"
+    },
+    "chatTips": {
+      "title": "Amathiphu Wengxoxo",
+      "tips": {
+        "tip1": "Buza imibuzo ethile ukuze uthole izimpendulo ezingcono",
+        "tip2": "Zama 'Chaza [isihloko] ngamagama alula'",
+        "tip3": "Buza izibonelo ukuze uqonde izimiso",
+        "tip4": "Cela izihloko ezihlobene ukuze uhlolisise okwengeziwe",
+        "tip5": "Buza 'Kungani [isihloko] kubalulekile?'"
+      }
+    },
+    "materials": {
+      "emptyState": {
+        "iconAlt": "Isithonjana Sencwadi",
+        "title": "Azikho izinto zokufunda okwamanje",
+        "description": "Buza umbuzo ukuze udale izinto zokufunda"
+      }
+    }
+  },
+  "Selectors": {
+    "GradeSelector": {
+      "placeholder": "Khetha Ibanga...",
+      "searchPlaceholder": "Sesha Amabanga...",
+      "emptyState": "Azikho izigaba ezitholakalayo.",
+      "grades": {
+        "grade3": "Ibanga 3",
+        "grade7": "Ibanga 7"
+      }
+    },
+    "TopicSelector": {
+      "placeholder": "Khetha Isihloko...",
+      "searchPlaceholder": "Sesha Izihloko...",
+      "emptyState": "Azikho izihloko ezitholakalayo.",
+      "topics": {
+        "livingAndNonLivingThings": "Izinto Eziphilayo Nezingaphili"
+      }
+    },
+    "SubjectSelector": {
+      "placeholder": "Khetha Isifundo...",
+      "searchPlaceholder": "Sesha Izifundo...",
+      "emptyState": "Azikho izifundo ezitholakalayo.",
+      "subjects": {
+        "biology": "Ibhayoloji"
+      }
+    }
+  },
+  "QuizGame": {
+    "loading": {
+      "title": "Kulayishwa imibuzo...",
+      "description": "Kulayishwa imibuzo ngesihloko esithi "
+    },
+    "noQuestions": {
+      "title": "Azikho Imibuzo Etolakalayo",
+      "description": "Azikho imibuzo etholakalayo ngalesi sihloko. Sicela uzame esinye isihloko."
+    },
+    "progress": {
+      "question": "Umbuzo",
+      "score": "Amaphuzu:"
+    },
+    "buttons": {
+      "checkAnswer": "Hlola Impendulo",
+      "nextQuestion": "Umbuzo Olandelayo",
+      "finishQuiz": "Qeda Umbuzo"
+    },
+    "results": {
+      "correct": "Kulungile!",
+      "incorrect": "Akulungile!"
+    },
+    "questions": {
+      "question1": {
+        "text": "Iyini incazelo eyinhloko yezinto eziphilayo nezingaphili?",
+        "option1": "Kuyahlukaniswa izinto ngokusekelwe ekusebenziseni kwazo kubantu",
+        "option2": "Kugxilwa ekutheni izinto ziyakwazi yini ukuhamba noma cha",
+        "option3": "Kuhlanganisa izici zobhayoloji kanye nokusebenzisana kwemvelo",
+        "option4": "Kuyindlela yokuhlukanisa esesidala",
+        "correctAnswer": "option3"
+      },
+      "question2": {
+        "text": "Yikuphi okungeyona into eyisici sezinto eziphilayo?",
+        "option1": "Ukukhula",
+        "option2": "Ukuphefumula",
+        "option3": "Ukuzala",
+        "option4": "Ukuba yinto eyenziwe ngepulasitiki",
+        "correctAnswer": "option4"
+      },
+      "question3": {
+        "text": "Izinto eziphilayo nezingaphili zihlukaniswa kanjani ezimeni zangempela?",
+        "option1": "Ngokuhlolwa kuphela ezindaweni zokucwaninga",
+        "option2": "Ngokuhlola ukuthi ziyasiza yini",
+        "option3": "Ngokubheka ukuhamba kuphela",
+        "option4": "Ngokuhlola izici ezifana nokukhula nokuphendula izikhuthazo",
+        "correctAnswer": "option4"
+      },
+      "question4": {
+        "text": "Iyiphi into eyisisekelo sokuqonda izinto eziphilayo nezingaphili?",
+        "option1": "Izimiso eziyisisekelo ezifana nokukhula, ukuphefumula, nokuzala",
+        "option2": "Ukwazi amagama azo zonke izilwane nezitshalo",
+        "option3": "Ukufunda amagama esayensi",
+        "option4": "Ukufunda ngomlando wobhayoloji",
+        "correctAnswer": "option1"
+      },
+      "question5": {
+        "text": "Iyiphi inkambu esondelene kakhulu nocwaningo lwezinto eziphilayo nezingaphili?",
+        "option1": "Izibalo",
+        "option2": "Umlando",
+        "option3": "Ibhayoloji",
+        "option4": "Ijeografi",
+        "correctAnswer": "option3"
+      }
+    }
+  }
+}

@@ -2,31 +2,12 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Brain, Gamepad2Icon as GameController2 } from "lucide-react";
-import { Dialog, DialogPanel } from "@headlessui/react";
-import LearnWithKwethuIcon from "@/components/icons/LearnWithKwethu";
-import CurvedTextButton from "@/components/ui/curved-text-button";
+import { useTranslations } from "next-intl";
 
-const navigation = [
-  { name: "Product", href: "#" },
-  { name: "Features", href: "#" },
-  { name: "Marketplace", href: "#" },
-  { name: "Company", href: "#" },
-];
 const bg = "/assets/images/bg.png"; // directly referencing from the public folder
 
 export default function HomePage() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
+  const t = useTranslations("HomePage");
   return (
     <div
       style={{
@@ -53,11 +34,10 @@ export default function HomePage() {
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
             <div className="mx-auto max-w-2xl text-center">
               <h1 className="text-7xl pt-2 font-extrabold tracking-tight text-white sm:text-6xl">
-                Boost Your Child's Future
+                {t("title")}
               </h1>
               <p className="mt-6 text-4xl leading-8 text-center text-white">
-                Unlocking Potential: Your Partner in Cultivating Your Child's
-                Educational Journey
+                {t("description")}
               </p>
               <div className="flex justify-center mt-4">
                 <img
@@ -80,7 +60,7 @@ export default function HomePage() {
                 className="w-10 h-10"
               />
               <span className="text-xl font-semibold text-gray-800">
-                Play Games
+                {t("playGameButton")}
               </span>
             </div>
           </Link>
@@ -92,7 +72,7 @@ export default function HomePage() {
                 className="w-10 h-10"
               />
               <span className="text-xl font-semibold text-gray-800">
-                Learn More
+                {t("learnMoreButton")}
               </span>
             </div>
           </Link>

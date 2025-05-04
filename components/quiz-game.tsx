@@ -13,6 +13,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { Progress } from "@/components/ui/progress";
 import { ArrowRight, CheckCircle, XCircle } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 interface QuizGameProps {
   topic: string;
@@ -33,13 +34,14 @@ export function QuizGame({ topic, onComplete }: QuizGameProps) {
   const [isAnswered, setIsAnswered] = useState(false);
   const [correctAnswers, setCorrectAnswers] = useState(0);
   const [loading, setLoading] = useState(true);
+  const t = useTranslations("QuizGame");
 
   useEffect(() => {
     // In a real app, you would fetch questions from an API based on the topic
     // For now, we'll generate some sample questions
     setLoading(true);
     setTimeout(() => {
-      setQuestions(generateQuestions(topic));
+      setQuestions(generateQuestions(topic, t));
       setLoading(false);
     }, 1000);
   }, [topic]);
@@ -93,7 +95,7 @@ export function QuizGame({ topic, onComplete }: QuizGameProps) {
               </div>
             </div>
             <p className="mt-4 text-muted-foreground">
-              Loading questions about {topic}...
+              {t("loading.description")} {topic}...
             </p>
           </CardContent>
         </Card>
@@ -106,9 +108,7 @@ export function QuizGame({ topic, onComplete }: QuizGameProps) {
       <div className="max-w-2xl mx-auto">
         <Card>
           <CardContent className="p-8 text-center">
-            <p>
-              No questions available for this topic. Please try another topic.
-            </p>
+            <p>{t("noQuestions.description")}</p>
           </CardContent>
         </Card>
       </div>
@@ -120,11 +120,13 @@ export function QuizGame({ topic, onComplete }: QuizGameProps) {
       <div className="mb-2 flex items-center justify-between">
         <div>
           <span className="text-xl font-medium">
-            Question {currentQuestionIndex + 1} of {questions.length}
+            {t("progress.question")} {currentQuestionIndex + 1} of{" "}
+            {questions.length}
           </span>
         </div>
         <div className="text-xl font-medium">
-          Score: {correctAnswers}/{currentQuestionIndex + (isAnswered ? 1 : 0)}
+          {t("progress.score")}: {correctAnswers}/
+          {currentQuestionIndex + (isAnswered ? 1 : 0)}
         </div>
       </div>
 
@@ -181,13 +183,13 @@ export function QuizGame({ topic, onComplete }: QuizGameProps) {
               disabled={selectedOption === null}
               className="w-full text-xl"
             >
-              Check Answer
+              {t("buttons.checkAnswer")}
             </Button>
           ) : (
             <Button onClick={handleNextQuestion} className="w-full text-xl">
               {currentQuestionIndex < questions.length - 1
-                ? "Next Question"
-                : "Finish Quiz"}
+                ? t("buttons.nextQuestion")
+                : t("buttons.finishQuiz")}
               <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
           )}
@@ -198,66 +200,65 @@ export function QuizGame({ topic, onComplete }: QuizGameProps) {
 }
 
 // Helper function to generate sample questions
-function generateQuestions(topic: string): Question[] {
-  // In a real app, you would generate questions based on the topic using AI
-  // or fetch them from a database
-
-  // For now, we'll create some generic questions
+function generateQuestions(
+  topic: string,
+  t: (key: string) => string
+): Question[] {
   return [
     {
       id: 1,
-      text: `What is the main concept behind living and non-living things?`,
+      text: t("questions.question1.text"),
       options: [
-        `It is about classifying objects based on their usefulness to humans`,
-        `It focuses on whether things can move or not`,
-        `It combines both biological characteristics and environmental interaction`,
-        `It is an outdated classification system`,
+        t("questions.question1.option1"),
+        t("questions.question1.option2"),
+        t("questions.question1.option3"),
+        t("questions.question1.option4"),
       ],
       correctAnswer: 2,
     },
     {
       id: 2,
-      text: `Which of the following is NOT a characteristic of living things?`,
+      text: t("question2.text"),
       options: [
-        `Growth`,
-        `Breathing`,
-        `Reproduction`,
-        `Being made of plastic`,
+        t("questions.question2.option1"),
+        t("questions.question2.option2"),
+        t("questions.question2.option3"),
+        t("questions.question2.option4"),
       ],
       correctAnswer: 3,
     },
     {
       id: 3,
-      text: `How are living and non-living things typically identified in real-world scenarios?`,
+      text: t("questions.question3.text"),
       options: [
-        `Only through laboratory tests`,
-        `By checking if they are useful`,
-        `By observing movement only`,
-        `By checking for characteristics like growth and response to stimuli`,
+        t("questions.question3.option1"),
+        t("questions.question3.option2"),
+        t("questions.question3.option3"),
+        t("questions.question3.option4"),
       ],
       correctAnswer: 3,
     },
     {
       id: 4,
-      text: `What is considered the foundation of understanding living and non-living things?`,
+      text: t("questions.question4.text"),
       options: [
-        `Basic principles like growth, respiration, and reproduction`,
-        `Knowing the names of all animals and plants`,
-        `Memorizing scientific terms`,
-        `Reading about the history of biology`,
+        t("questions.question4.option1"),
+        t("questions.question4.option2"),
+        t("questions.question4.option3"),
+        t("questions.question4.option4"),
       ],
       correctAnswer: 0,
     },
     {
       id: 5,
-      text: `Which field is most closely related to the study of living and non-living things?`,
+      text: t("questions.question5.text"),
       options: [
-        `Mathematics`,
-        `History`,
-        `Biology`,
-        `Geography`,
+        t("questions.question5.option1"),
+        t("questions.question5.option2"),
+        t("questions.question5.option3"),
+        t("questions.question5.option4"),
       ],
       correctAnswer: 2,
     },
-    ];
-  }
+  ];
+}

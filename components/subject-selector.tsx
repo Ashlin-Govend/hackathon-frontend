@@ -17,28 +17,19 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
+import { useTranslations } from "next-intl";
 
-interface GradeSelectorProps {
+interface SubjectSelectorProps {
   onSelect: (topic: string) => void;
 }
 
-export function SubjectSelector({ onSelect }: GradeSelectorProps) {
+export function SubjectSelector({ onSelect }: SubjectSelectorProps) {
   const [open, setOpen] = useState(false);
   const [selectedTopic, setSelectedTopic] = useState("");
+  const t = useTranslations("Selectors.SubjectSelector");
 
-  // In a real app, these would be fetched from an API based on the user's learning history
-  const topics = [
-    // { value: "mathematics", label: "Mathematics" },
-    // { value: "physics", label: "Physics" },
-    { value: "biology", label: "Biology" },
-    // { value: "chemistry", label: "Chemistry" },
-    // { value: "history", label: "History" },
-    // { value: "literature", label: "Literature" },
-    // { value: "computer-science", label: "Computer Science" },
-    // { value: "astronomy", label: "Astronomy" },
-    // { value: "geography", label: "Geography" },
-    // { value: "psychology", label: "Psychology" },
-  ];
+  // Subjects are now translated using the JSON fields
+  const topics = [{ value: "biology", label: t("subjects.biology") }];
 
   const handleSelect = (topic: string) => {
     setSelectedTopic(topic);
@@ -57,14 +48,14 @@ export function SubjectSelector({ onSelect }: GradeSelectorProps) {
         >
           {selectedTopic
             ? topics.find((topic) => topic.value === selectedTopic)?.label
-            : "Select a Subject..."}
+            : t("placeholder")}
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-full p-0">
         <Command>
-          <CommandInput placeholder="Search Subject..." className="h-9" />
+          <CommandInput placeholder={t("searchPlaceholder")} className="h-9" />
           <CommandList>
-            <CommandEmpty>No Subjects found.</CommandEmpty>
+            <CommandEmpty>{t("emptyState")}</CommandEmpty>
             <CommandGroup>
               {topics.map((topic) => (
                 <CommandItem

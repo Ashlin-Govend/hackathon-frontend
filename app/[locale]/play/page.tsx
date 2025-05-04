@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -18,6 +19,8 @@ import { GradeSelector } from "@/components/grade-selector";
 import { SubjectSelector } from "@/components/subject-selector";
 
 export default function PlayPage() {
+  const t = useTranslations("GamePage");
+
   const [selectedTopic, setSelectedTopic] = useState("");
   const [selectedGrade, setSelectedGrade] = useState("");
   const [selectedSubject, setSelectedSubject] = useState("");
@@ -73,7 +76,7 @@ export default function PlayPage() {
         >
           <ArrowRight className="mr-2 h-4 w-8 rotate-180" />
         </Button>
-        <h1 className="text-3xl font-bold text-[#fac62c]">Knowledge Games</h1>
+        <h1 className="text-3xl font-bold">{t("title")}</h1>
       </div>
 
       {!gameStarted && !gameCompleted ? (
@@ -81,10 +84,10 @@ export default function PlayPage() {
           <Card>
             <CardHeader>
               <CardTitle className="text-3xl">
-                Select Your Preferences
+                {t("preferences.title")}
               </CardTitle>
               <CardDescription className="text-xl">
-                Choose a grade, subject, and topic to start the game
+                {t("preferences.description")}
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -101,7 +104,8 @@ export default function PlayPage() {
                 disabled={!selectedTopic || !selectedGrade || !selectedSubject}
                 className="w-full text-2xl "
               >
-                Start Game <ArrowRight className="ml-2 h-4 w-4" />
+                {t("preferences.startButton")}{" "}
+                <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </CardFooter>
           </Card>
@@ -111,31 +115,39 @@ export default function PlayPage() {
           <Card>
             <CardHeader className="text-center">
               <Trophy className="h-16 w-16 text-yellow-500 mx-auto mb-4" />
-              <CardTitle className="text-3xl">Game Completed!</CardTitle>
+              <CardTitle className="text-3xl">
+                {t("gameCompleted.title")}
+              </CardTitle>
               <CardDescription className="text-lg">
-                You've completed the quiz on {selectedTopic}
+                {t("gameCompleted.description", { topic: selectedTopic })}
               </CardDescription>
             </CardHeader>
             <CardContent className="text-center">
-              <h3 className="text-2xl font-bold mb-4">Your Score: {score}%</h3>
+              <h3 className="text-2xl font-bold mb-4">
+                {t("gameCompleted.scoreTitle", { score })}
+              </h3>
               <Progress value={score} className="h-4 mb-6" />
 
               <div className="grid gap-4 mb-6">
                 <div className="p-4 bg-primary/10 rounded-lg text-xl">
-                  <h4 className="font-medium mb-2 ">What you did well:</h4>
+                  <h4 className="font-medium mb-2">
+                    {t("gameCompleted.whatYouDidWell.title")}
+                  </h4>
                   <p className="text-lg text-muted-foreground">
                     {score > 70
-                      ? "Great job! You have a solid understanding of the topic."
-                      : "You've made a good start with understanding the basics."}
+                      ? t("gameCompleted.whatYouDidWell.highScoreMessage")
+                      : t("gameCompleted.whatYouDidWell.lowScoreMessage")}
                   </p>
                 </div>
 
                 <div className="p-4 bg-primary/10 rounded-lg text-xl">
-                  <h4 className="font-medium mb-2">Areas to improve:</h4>
+                  <h4 className="font-medium mb-2">
+                    {t("gameCompleted.areasToImprove.title")}
+                  </h4>
                   <p className="text-lg text-muted-foreground">
                     {score > 70
-                      ? "Review the few questions you missed to perfect your knowledge."
-                      : "Consider revisiting the learning materials to strengthen your understanding."}
+                      ? t("gameCompleted.areasToImprove.highScoreMessage")
+                      : t("gameCompleted.areasToImprove.lowScoreMessage")}
                   </p>
                 </div>
               </div>
@@ -146,10 +158,11 @@ export default function PlayPage() {
                 onClick={resetGame}
                 className="w-full sm:w-auto text-xl"
               >
-                <RefreshCw className="mr-2 h-4 w-4" /> Try Another Topic
+                <RefreshCw className="mr-2 h-4 w-4" />{" "}
+                {t("gameCompleted.tryAnotherTopicButton")}
               </Button>
               <Button onClick={startGame} className="w-full sm:w-auto text-xl">
-                Play Again
+                {t("gameCompleted.playAgainButton")}
               </Button>
             </CardFooter>
           </Card>
