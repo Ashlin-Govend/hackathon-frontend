@@ -3,7 +3,10 @@
     "title": "Boost Your Child's Future",
     "description": "Unlocking Potential: Your Partner in Cultivating Your Child's Educational Journey",
     "playGameButton": "Play Game",
-    "learnMoreButton": "Learn More"
+    "learnMoreButton": "Learn More",
+    "joinNowButton": "Unlock More Features",
+    "unlockFeaturesMessage": "Unlock premium features for personalized learning experiences."
+
   },
     "GamePage": {
       "title": "Knowledge Games",

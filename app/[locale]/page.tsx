@@ -12,14 +12,15 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Brain, Gamepad2Icon as GameController2 } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 const bg = "/assets/images/bg.png";
 
 const languages = [
   { code: "en", label: "English" },
   { code: "zu", label: "Zulu" },
-  { code: "af", label: "Afrikaans" },
-  { code: "xh", label: "Xhosa" },
+  // { code: "af", label: "Afrikaans" },
+  // { code: "xh", label: "Xhosa" },
 ];
 
 function LanguageSelector() {
@@ -31,7 +32,16 @@ function LanguageSelector() {
   const handleSelect = (lang: string) => {
     setSelected(lang);
     setIsOpen(false);
-    // Here you could also trigger a language switch logic
+
+    const selectedLanguage = languages.find((l) => l.label === lang)?.code;
+    if (selectedLanguage) {
+      const currentPath = window.location.pathname;
+      const newPath = `/${selectedLanguage}${currentPath.replace(
+        /^\/[a-z]{2}/,
+        ""
+      )}`;
+      window.location.href = newPath;
+    }
   };
 
   return (
@@ -101,6 +111,11 @@ export default function HomePage() {
               <p className="mt-6 text-4xl leading-8 text-center text-white">
                 {t("description")}
               </p>
+              <div className="mt-6">
+                <Button variant="secondary" className="px-8 py-4 text-lg">
+                  {t("joinNowButton")}
+                </Button>
+              </div>
               <div className="flex justify-center mt-4">
                 <img
                   src="/assets/images/hero.png"

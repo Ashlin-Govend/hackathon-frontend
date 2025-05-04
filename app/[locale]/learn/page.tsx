@@ -119,14 +119,14 @@ export default function LearnPage() {
               </div>
               <form
                 onSubmit={handleSubmit}
-                className="flex items-center space-x-4"
+                className="flex items-center space-x-4 text-xl"
               >
                 <Input
                   value={input}
                   onChange={handleInputChange}
                   placeholder={t("chat.placeholder")}
                   disabled={isLoading}
-                  className="flex-grow text-2xl placeholder:text-xl py-4 border border-[#c49014]"
+                  className="flex-grow text-2xl py-4 border border-[#c49014] placeholder:text-2xl"
                 />
                 <Button
                   type="submit"
